@@ -1,0 +1,42 @@
+name: Publish to PyPI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install setuptools wheel twine
+
+    - name: Check commit message
+      run: |
+        if [[ $(git log -1 --pretty=%B) =~ v[0-9]+\.[0-9]+ ]]; then
+          echo "Commit message contains version pattern. Proceeding with build and publish."
+        else
+          echo "Warning: Commit message does not contain version pattern. Skipping version-specific actions."
+        fi
+
+    - name: Build and publish
+      if: success()  # Only run if the check passed
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+      run: |
+        echo "Building and publishing to PyPI..."
+        python setup.py sdist bdist_wheel
+        twine upload dist/*

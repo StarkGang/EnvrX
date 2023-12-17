@@ -1,0 +1,5 @@
+envrx/__pycache__/__init__.cpython-311.pyc
+*.pyc
+*.db
+*.env
+test.py
