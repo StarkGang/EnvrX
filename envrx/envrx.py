@@ -47,6 +47,9 @@ class ENVRX:
         self.database_url_name = None
         if self.database_url and (not self.collection_or_table_name):
             raise InvalidCollectionOrTableName("No database/table name given. Please provide a database/table name.")
+        self.collection_or_table_name = self.collection_or_table_name.strip()
+        if " " in self.collection_or_table_name:
+            raise ValueError("Collection/table name cannot contain spaces. Please provide a valid collection/table name.")
 
     def intilize(self) -> None:
         """Initialize the ENVRX class.
@@ -64,7 +67,7 @@ class ENVRX:
                     raise ImportError("pymongo is not installed. Please install it using pip install pymongo.")
                 self.client = MongoClient(self.database_url)
                 try:
-                    self.client.server_info()
+                    self.client.envrx.command('ping')
                 except Exception as e:
                     log.error("MongoDB database url is invalid. Unable to connect to the database.")
                     raise InvalidDatabaseUrl("Invalid database url. Please check the url and try again.", e)
@@ -232,6 +235,10 @@ class ENVRX:
             str: Environment variable value."""
         if not self.database_url:
             raise NoDatabaseUrlSupplied("No database url supplied. Please supply a database url.")
+        if type(key) not in (str):
+            raise TypeError("Invalid key type. Please provide a valid key.")
+        if ' ' in key:
+            raise ValueError("Keys cannot contain spaces. Please provide a valid key.")
         log.debug(f"Getting environment variable {key} from database.")
         if self.database_url_name == 'mongo':
             db = self.client.envrx
@@ -259,6 +266,7 @@ class ENVRX:
             dict: Environment variables."""
         if not self.database_url:
             raise NoDatabaseUrlSupplied("No database url supplied. Please supply a database url.")
+        log.debug("Getting all environment variables from database.")
         if self.database_url_name == 'mongo':
             db = self.client.envrx
             collection = db[self.collection_or_table_name]
@@ -280,6 +288,10 @@ class ENVRX:
             None"""
         if not self.database_url:
             raise NoDatabaseUrlSupplied("No database url supplied. Please supply a database url.")
+        if type(key) not in (str):
+            raise TypeError("Invalid key type. Please provide a valid key.")
+        if ' ' in key:
+            raise ValueError("Keys cannot contain spaces. Please provide a valid key.")
         if self.database_url_name == 'mongo':
             log.debug(f"Loading environment variable {key}={value} to MongoDB database.")
             db = self.client.envrx
@@ -304,6 +316,10 @@ class ENVRX:
             None"""
         if not self.database_url:
             raise NoDatabaseUrlSupplied("No database url supplied. Please supply a database url.")
+        if type(key) not in (str):
+            raise TypeError("Invalid key type. Please provide a valid key.")
+        if ' ' in key:
+            raise ValueError("Keys cannot contain spaces. Please provide a valid key.")
         log.debug(f"Deleting environment variable {key} from database.")
         if self.database_url_name == 'mongo':
             db = self.client.envrx
@@ -331,6 +347,10 @@ class ENVRX:
             None"""
         if not self.database_url:
             raise NoDatabaseUrlSupplied("No database url supplied. Please supply a database url.")
+        if type(key) not in (str):
+            raise TypeError("Invalid key type. Please provide a valid key.")
+        if ' ' in key:
+            raise ValueError("Keys cannot contain spaces. Please provide a valid key.")
         if self.database_url_name == 'mongo':
             db = self.client.envrx
             collection = db[self.collection_or_table_name]

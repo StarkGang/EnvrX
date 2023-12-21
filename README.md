@@ -1,6 +1,7 @@
 # ENVRX
 
 `ENVRX` is a Python class designed to manage environment variables seamlessly, providing support for various databases such as MongoDB, SQL, and Redis.
+It also supports env files (let it be .json, .env or even .yaml)
 
 ## Table of Contents
 
@@ -88,9 +89,9 @@ env_manager.update_env_in_database("EXISTING_KEY", "UPDATED_VALUE")
 
 ## Examples
 
-No example has been made yet but you can always send a PR.
+Database wise Examples can be found [here](https://github.com/StarkGang/EnvrX/tree/main/examples).
 
 
 ## License
 
-This project is licensed under the [GPL V3.0](https://github.com/Starkgang/Envrx/LICENSE).
+This project is licensed under the [GPL V3.0](https://github.com/StarkGang/EnvrX/blob/main/LICENSE).
