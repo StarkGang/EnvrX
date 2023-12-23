@@ -1,7 +1,8 @@
-from envrx import ENVRX
 import os
 
-xenv = ENVRX(database_url="sqlitelocal.db", database_name="config", env_file="sample.env")
+from envrx import ENVRX
+
+xenv = ENVRX(database="sqlitelocal.db", database_name="config", env_file="sample.env")
 xenv.intilize()
 
 

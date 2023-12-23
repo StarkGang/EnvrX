@@ -1,10 +1,11 @@
-from envrx import ENVRX
 import os
 
+from envrx import ENVRX
+
 # for sqlite3
-xenv = ENVRX(database_url="database.db", database_name="config") # data will be stored in database.db file
+xenv = ENVRX(database="database.db", database_name="config") # data will be stored in database.db file
 # or for postgresql
-xenv = ENVRX(database_url="postgresql://user:password@localhost:5432/database", database_name="config")
+xenv = ENVRX(database="postgresql://user:password@localhost:5432/database", database_name="config")
 xenv.intilize()
 # Accessing Key from database
 print(os.environ.get("alread_key_in_database")) # Will print the key which is already in the database 

@@ -1,6 +1,6 @@
-from envrx import ENVRX
 import os
 
+from envrx import ENVRX
 
 xenv = ENVRX(env_file="sample.env")
 xenv.intilize()

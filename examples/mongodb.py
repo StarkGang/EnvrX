@@ -1,8 +1,8 @@
-from envrx import ENVRX
 import os
 
+from envrx import ENVRX
 
-xenv = ENVRX(database_url="mongodb://localhost:27017/", database_name="config")
+xenv = ENVRX(database="mongodb://localhost:27017/", database_name="config")
 xenv.intilize()
 # Accessing Key from database
 print(os.environ.get("alread_key_in_database")) # Will print the key which is already in the database 

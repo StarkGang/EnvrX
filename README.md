@@ -35,7 +35,11 @@ from envrx import ENVRX
 import os
 
 # Initialize ENVRX with optional parameters
-env_manager = ENVRX(env_file=".env", database_url="mongodb://localhost:27017", collection_or_table_name="env_variables")
+env_manager = ENVRX(env_file=".env", database="mongodb://localhost:27017", collection_or_table_name="env_variables")
+
+# or pass a database client client
+client = MongoClient(...)
+env_manager = ENVRX(env_file=".env", database=client, collection_or_table_name="env_variables")
 
 # Initialize the environment
 env_manager.initialize()
@@ -46,12 +50,15 @@ print(os.getenv("env_from_db_or_file"))
 ## Class Initialization
 
 - `env_file` (Optional): Path to the environment file.
-- `database_url` (Optional): Database URL for MongoDB, SQL, or Redis.
+- `database` (Optional): Database URL for MongoDB, SQL, or Redis.
 - `collection_or_table_name` (Optional): Name of the collection or table in the database.
 
 ```python
 # Example initialization
-env_manager = ENVRX(env_file=".env", database_url="mongodb://localhost:27017", collection_or_table_name="env_variables")
+env_manager = ENVRX(env_file=".env", database="mongodb://localhost:27017", collection_or_table_name="env_variables")
+# or if you have a database client
+client = MongoClient(...)
+env_manager = ENVRX(env_file=".env", database=client, collection_or_table_name="env_variables")
 ```
 
 ## Loading Environment

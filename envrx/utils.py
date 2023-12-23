@@ -6,9 +6,11 @@
 #
 # All rights reserved.
 
+
 def check_if_package_installed(package_name: str) -> bool:
     """Check if a package is installed."""
     import importlib
+
     try:
         importlib.import_module(package_name)
         return True
@@ -16,15 +18,15 @@ def check_if_package_installed(package_name: str) -> bool:
         return False
 
 
-def guess_which_database_from_url(url: str) -> str:
+def guess_which_database_from(url: str) -> str:
     """Guess which database is being used from the url."""
-    if url.startswith('mongodb'):
-        return 'mongo'
+    if url.startswith("mongodb"):
+        return "mongo"
     elif url.endswith(".db"):
-        return 'sqlite'
-    elif url.startswith('postgresql'):
-        return 'sql'
-    elif url.startswith('redis'):
-        return 'redis'
+        return "sqlite"
+    elif url.startswith("postgresql"):
+        return "sql"
+    elif url.startswith("redis"):
+        return "redis"
     else:
         return None

@@ -6,14 +6,18 @@
 #
 # All rights reserved.
 
+
 class InvalidEnvFile(Exception):
     pass
+
 
 class InvalidDatabaseUrl(Exception):
     pass
 
+
 class InvalidLogLevel(Exception):
     pass
+
 
 class InvalidCollectionOrTableName(Exception):
     pass
